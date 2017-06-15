@@ -1,7 +1,10 @@
 package ch.makery.address;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
+import ch.makery.address.classes.Music;
+import ch.makery.address.managers.MusicManager;
 import ch.makery.address.model.Musique;
 import ch.makery.address.view.MusiqueOverviewController;
 import javafx.application.Application;
@@ -98,31 +101,47 @@ public class MainApp extends Application {
 
         // Add some sample data
         int i=0;
-        // point d'encrage avec la BDD permettant de réupéré les information sur les musiques.
-        musiqueData.add(new Musique("Linkin park","Rock","Angleterre","Instrumental"));
-        musiqueData.add(new Musique("Louis Amstrong","Jazz","Etats-Unis","Annee80"));
-        musiqueData.add(new Musique("Edith Piaf", "Chanson Française","France","Annee80"));
-        musiqueData.add(new Musique("Daft Punk", "Electronique","France","Instrumental"));
-        musiqueData.add(new Musique("MC Solaar", "Rap","France","Populaire"));
-        musiqueData.add(new Musique("Wati B", "Rap","France","Populaire"));
-        musiqueData.add(new Musique("Adele", "pop","Angleterre","Recent"));
-        musiqueData.add(new Musique("Jaque Brel", "Chanson Française","Belgique","Annee80"));
-        musiqueData.add(new Musique("Francky Vincent", "Chanson Française","France","Populaire"));
 
-        while(i<musiqueData.size()){
-            if(musiqueData.get(i).getCategorie()=="Recent") {
-                musiqueRecentData.add(musiqueData.get(i));
+        try {
+            MusicManager mm = new MusicManager();
+            ArrayList<Music> list = mm.getAllmusics();
+
+            for (Music music : list) {
+                musiqueData.add(new Musique(music.getName(), music.getSort(), music.getCountry(), music.getType()));
             }
-            if(musiqueData.get(i).getCategorie()=="Instrumental") {
-                musiqueInstrumentalData.add(musiqueData.get(i));
+
+
+            /*
+            // point d'encrage avec la BDD permettant de réupéré les information sur les musiques.
+            musiqueData.add(new Musique("Linkin park", "Rock", "Angleterre", "Instrumental"));
+            musiqueData.add(new Musique("Louis Amstrong", "Jazz", "Etats-Unis", "Annee80"));
+            musiqueData.add(new Musique("Edith Piaf", "Chanson Française", "France", "Annee80"));
+            musiqueData.add(new Musique("Daft Punk", "Electronique", "France", "Instrumental"));
+            musiqueData.add(new Musique("MC Solaar", "Rap", "France", "Populaire"));
+            musiqueData.add(new Musique("Wati B", "Rap", "France", "Populaire"));
+            musiqueData.add(new Musique("Adele", "pop", "Angleterre", "Recent"));
+            musiqueData.add(new Musique("Jaque Brel", "Chanson Française", "Belgique", "Annee80"));
+            musiqueData.add(new Musique("Francky Vincent", "Chanson Française", "France", "Populaire")); */
+
+            while (i < musiqueData.size()) {
+                if (musiqueData.get(i).getCategorie().equals("Recent")) {
+                    musiqueRecentData.add(musiqueData.get(i));
+                }
+                if (musiqueData.get(i).getCategorie().equals("Instrumental")) {
+                    musiqueInstrumentalData.add(musiqueData.get(i));
+                }
+                if (musiqueData.get(i).getCategorie().equals("Annee80")) {
+                    musiqueAnnee80Data.add(musiqueData.get(i));
+                }
+                if (musiqueData.get(i).getCategorie().equals("Populaire")) {
+                    musiquePopulaireData.add(musiqueData.get(i));
+                }
+                i++;
             }
-            if(musiqueData.get(i).getCategorie()=="Annee80") {
-                musiqueAnnee80Data.add(musiqueData.get(i));
-            }
-            if(musiqueData.get(i).getCategorie()=="Populaire") {
-                musiquePopulaireData.add(musiqueData.get(i));
-            }
-            i++;
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
