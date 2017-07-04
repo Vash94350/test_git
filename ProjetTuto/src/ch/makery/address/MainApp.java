@@ -1,6 +1,7 @@
 package ch.makery.address;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import ch.makery.address.managers.MusicManager;
@@ -28,8 +29,8 @@ public class MainApp extends Application {
 
         initRootLayout();
 
-        //showMusiqueOverview(null); // Il faut inserer le Z index ici pour l'instant on ne lance que la fenetre de connection
-        showLoginOverview();
+        showMusiqueOverview(null); // Il faut inserer le Z index ici pour l'instant on ne lance que la fenetre de connection
+        //showLoginOverview();
     }
 
     /**
@@ -111,6 +112,7 @@ public class MainApp extends Application {
     private ObservableList<Music> musiqueAnnee80Data = FXCollections.observableArrayList();
     private ObservableList<Music> musiqueInstrumentalData = FXCollections.observableArrayList();
     private ObservableList<Music> musiqueData = FXCollections.observableArrayList();
+    private ObservableList<String> style_of_musique = FXCollections.observableArrayList();
     private Music touteLesMusiques[]=new Music[9];
 
     /**
@@ -122,7 +124,9 @@ public class MainApp extends Application {
         int i=0;
         try {
 
+
             MusicManager mm = new MusicManager();
+
             ArrayList<Music> list = mm.getAllmusics();
 
             for (Music music : list) {
@@ -144,6 +148,13 @@ public class MainApp extends Application {
                 }
                 i++;
             }
+
+            ArrayList<String> sorts = mm.getAllSorts();
+
+            for(String str : sorts) {
+                style_of_musique.add(str);
+            }
+            style_of_musique.add("Aucun filtre");
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -168,5 +179,10 @@ public class MainApp extends Application {
     }
     public Music[] getMusiques(){
         return touteLesMusiques;
+    }
+
+
+    public ObservableList<String> getStyle_Of_Musique() {
+        return style_of_musique;
     }
 }

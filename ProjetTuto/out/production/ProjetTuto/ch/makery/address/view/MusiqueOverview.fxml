@@ -48,6 +48,7 @@
                   <Label layoutX="566.0" layoutY="72.0" prefHeight="17.0" prefWidth="103.0" text="Année 80" />
                   <Label layoutX="877.0" layoutY="72.0" prefHeight="17.0" prefWidth="103.0" text="Instrumentals" />
                   <ChoiceBox fx:id="choix" layoutX="854.0" layoutY="31.0" prefWidth="150.0" />
+                  <Label fx:id="userConnected" layoutX="1108.0" layoutY="36.0" prefHeight="21.0" prefWidth="49.0" />
                </children>
             </AnchorPane>
             <AnchorPane layoutX="10.0" layoutY="10.0" maxHeight="150.0" minHeight="150.0" minWidth="0.0" prefHeight="160.0" prefWidth="1198.0">

@@ -22,7 +22,7 @@ public class MusicManager {
         Class.forName("com.mysql.cj.jdbc.Driver");
         connexion = DriverManager.getConnection(url, user, password);
 
-        ArrayList<ch.makery.address.model.Music> list = new ArrayList<>();
+        ArrayList<Music> list = new ArrayList<>();
 
         String sql = "Select * from musique";
         PreparedStatement ps = connexion.prepareStatement(sql);
@@ -48,5 +48,22 @@ public class MusicManager {
         music.setViews(rs.getInt("vue"));
 
         return music;
+    }
+
+    public ArrayList<String> getAllSorts() throws ClassNotFoundException, SQLException {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        connexion = DriverManager.getConnection(url, user, password);
+
+        ArrayList<String> sorts = new ArrayList<>();
+
+        String sql = "Select distinct genre from musique order by genre";
+        PreparedStatement ps = connexion.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+
+        while(rs.next()) {
+            sorts.add(rs.getString("genre"));
+        }
+
+        return sorts;
     }
 }

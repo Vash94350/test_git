@@ -118,7 +118,10 @@ public class MusiqueOverviewController {
         musiqueInstrumentalTable.setItems(mainApp.getMusiqueInstrumentalData());
         musiqueAnnee80Table.setItems(mainApp.getmusiqueAnnee80Data());
 
-        userConnected.setText(person.getLogin());
+        if(person != null)
+            userConnected.setText(person.getLogin());
+
+        choix.setItems(mainApp.getStyle_Of_Musique());
     }
 
     /**
