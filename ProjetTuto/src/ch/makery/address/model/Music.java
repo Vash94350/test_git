@@ -1,9 +1,13 @@
 package ch.makery.address.model;
 
+import ch.makery.address.util.DateUtil;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+
+import java.sql.Date;
+import java.time.LocalDate;
 
 /**
  * Created by torgu on 14/06/2017.
@@ -19,6 +23,7 @@ public class Music {
     private StringProperty url;
     private StringProperty sort;
     private StringProperty country;
+    private StringProperty date;
 
     public Music(String name, String description, String duration, String singer, int views, String url, String sort, String country) {
         this.name = new SimpleStringProperty(name);
@@ -29,6 +34,7 @@ public class Music {
         this.url = new SimpleStringProperty(url);
         this.sort = new SimpleStringProperty(sort);
         this.country = new SimpleStringProperty(country);
+        //this.date = new SimpleStringProperty(DateUtil.format((LocalDate) date));
     }
 
     public Music() {
@@ -119,4 +125,6 @@ public class Music {
     public void setCountry(String country) {
         this.country.set(country);
     }
+
+    //public void setDate(Date date) {this.date = date;}
 }

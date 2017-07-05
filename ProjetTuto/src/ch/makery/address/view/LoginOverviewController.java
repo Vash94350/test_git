@@ -12,15 +12,15 @@ import sun.rmi.runtime.Log;
 
 public class LoginOverviewController {
     @FXML
-    private TextField champs_co_email;
+    private TextField fieldEmailConnection;
     @FXML
-    private TextField champs_co_mdp;
+    private TextField fieldPasswordConnection;
     @FXML
-    private TextField champs_ins_email;
+    private TextField fieldEmailLogin;
     @FXML
-    private TextField champs_ins_mdp1;
+    private TextField fieldPasswordLogin_1;
     @FXML
-    private TextField champs_ins_mdp2;
+    private TextField fieldPasswordLogin_2;
     @FXML
     private Button connect;
     @FXML
@@ -51,16 +51,17 @@ public class LoginOverviewController {
     @FXML
     public void loadSignIn() {
         LoginManager lm = new LoginManager();
-        Person person = lm.connectUser(champs_co_email.getText(), champs_co_mdp.getText());
+        Person person = lm.connectUser(fieldEmailConnection.getText(), fieldPasswordConnection.getText());
     }
 
     @FXML
     public void loadSignUp() {
         LoginManager lm = new LoginManager();
-        String passwd1 = champs_ins_mdp1.getText();
-        String passwd2 = champs_ins_mdp2.getText();
+        String passwd1 = fieldPasswordLogin_1.getText();
+        String passwd2 = fieldPasswordLogin_2.getText();
+        Person person = new Person();
         if(passwd1 != null && passwd2 != null && passwd1.equals(passwd2))
-            inscription.setOnAction(event -> lm.signUpUser(champs_ins_email.getText(), champs_ins_mdp1.getText()));
+            person = lm.signUpUser(fieldEmailLogin.getText(), fieldPasswordLogin_1.getText());
         else {
 
         }

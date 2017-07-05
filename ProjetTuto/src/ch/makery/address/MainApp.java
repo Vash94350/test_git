@@ -107,13 +107,13 @@ public class MainApp extends Application {
     /**
      * The data as an observable list of Persons.
      */
-    private ObservableList<Music> musiqueRecentData = FXCollections.observableArrayList();
-    private ObservableList<Music> musiquePopulaireData = FXCollections.observableArrayList();
-    private ObservableList<Music> musiqueAnnee80Data = FXCollections.observableArrayList();
-    private ObservableList<Music> musiqueInstrumentalData = FXCollections.observableArrayList();
-    private ObservableList<Music> musiqueData = FXCollections.observableArrayList();
+    private ObservableList<Music> musicRapData = FXCollections.observableArrayList();
+    private ObservableList<Music> frenchMusicData = FXCollections.observableArrayList();
+    private ObservableList<Music> popMusicData = FXCollections.observableArrayList();
+    private ObservableList<Music> jazzMusicData = FXCollections.observableArrayList();
+    private ObservableList<Music> musicData = FXCollections.observableArrayList();
     private ObservableList<String> style_of_musique = FXCollections.observableArrayList();
-    private Music touteLesMusiques[]=new Music[9];
+    private Music allMusics[]=new Music[9];
 
     /**
      * Constructor
@@ -130,21 +130,21 @@ public class MainApp extends Application {
             ArrayList<Music> list = mm.getAllmusics();
 
             for (Music music : list) {
-                musiqueData.add(new Music(music.getName(), music.getDescription(), music.getDuration(), music.getSinger(), music.getViews(), music.getUrl(), music.getSort(), music.getCountry()));
+                musicData.add(new Music(music.getName(), music.getDescription(), music.getDuration(), music.getSinger(), music.getViews(), music.getUrl(), music.getSort(), music.getCountry()));
             }
 
-            while (i < musiqueData.size()) {
-                if (musiqueData.get(i).getSort().equals("Recent")) {
-                    musiqueRecentData.add(musiqueData.get(i));
+            while (i < musicData.size()) {
+                if (musicData.get(i).getSort().equals("Rap")) {
+                    musicRapData.add(musicData.get(i));
                 }
-                else if (musiqueData.get(i).getSort().equals("Instrumental")) {
-                    musiqueInstrumentalData.add(musiqueData.get(i));
+                else if (musicData.get(i).getSort().equals("Chanson Française")) {
+                    frenchMusicData.add(musicData.get(i));
                 }
-                else if (musiqueData.get(i).getSort().equals("Annee80")) {
-                    musiqueAnnee80Data.add(musiqueData.get(i));
+                else if (musicData.get(i).getSort().equals("Pop")) {
+                    popMusicData.add(musicData.get(i));
                 }
-                else if (musiqueData.get(i).getSort().equals("Populaire")) {
-                    musiquePopulaireData.add(musiqueData.get(i));
+                else if (musicData.get(i).getSort().equals("Jazz")) {
+                    jazzMusicData.add(musicData.get(i));
                 }
                 i++;
             }
@@ -165,20 +165,16 @@ public class MainApp extends Application {
      * Returns the data as an observable list of Persons.
      * @return
      */
-    public ObservableList<Music> getmusiqueRecentData() {
-        return musiqueRecentData;
+    public ObservableList<Music> getRapMusicData() {
+        return musicRapData;
     }
-    public ObservableList<Music> getmusiquePopulaireData() {
-        return musiquePopulaireData;
+    public ObservableList<Music> getFrenchMusicData() { return frenchMusicData;}
+    public ObservableList<Music> getPopMusicData() { return popMusicData;}
+    public ObservableList<Music> getJazzMusicData() {
+        return jazzMusicData;
     }
-    public ObservableList<Music> getmusiqueAnnee80Data() {
-        return musiqueAnnee80Data;
-    }
-    public ObservableList<Music> getMusiqueInstrumentalData() {
-        return musiqueInstrumentalData;
-    }
-    public Music[] getMusiques(){
-        return touteLesMusiques;
+    public Music[] getMusics(){
+        return allMusics;
     }
 
 

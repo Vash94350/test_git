@@ -11,43 +11,43 @@ import ch.makery.address.MainApp;
 
 public class MusiqueOverviewController {
     @FXML
-    private TableView<Music> musiqueRecenteTable;
+    private TableView<Music> musicRapTable;
     @FXML
-    private TableColumn<Music, String> groupeRecentColumn;
+    private TableColumn<Music, String> bandRapColumn;
     @FXML
-    private TableColumn<Music, String> styleRecentColumn;
+    private TableColumn<Music, String> nameRapColumn;
 
     @FXML
-    private TableView<Music> musiquePopulaireTable;
+    private TableView<Music> musicFrenchTable;
     @FXML
-    private TableColumn<Music, String> groupePopulaireColumn;
+    private TableColumn<Music, String> bandFrenchColumn;
     @FXML
-    private TableColumn<Music, String> stylePopulaireColumn;
+    private TableColumn<Music, String> nameFrenchColumn;
 
     @FXML
-    private TableView<Music> musiqueAnnee80Table;
+    private TableView<Music> musicPopTable;
     @FXML
-    private TableColumn<Music, String> groupeAnnee80Column;
+    private TableColumn<Music, String> bandPopColumn;
     @FXML
-    private TableColumn<Music, String> styleAnnee80Column;
+    private TableColumn<Music, String> namePopColumn;
 
     @FXML
-    private TableView<Music> musiqueInstrumentalTable;
+    private TableView<Music> musicJazzTable;
     @FXML
-    private TableColumn<Music, String> groupeInstrumentalColumn;
+    private TableColumn<Music, String> bandJazzColumn;
     @FXML
-    private TableColumn<Music, String> styleInstrumentalColumn;
+    private TableColumn<Music, String> nameJazzColumn;
 
     @FXML
-    private Label nomDuGroupeLabel;
+    private Label bandNameLabel;
     @FXML
     private Label styleLabel;
     @FXML
     private Label countryLabel;
     @FXML
-    private Label sortieLabel;
+    private Label releaseDateLabel;
     @FXML
-    private ChoiceBox<String> choix;
+    private ChoiceBox<String> styleChoice;
 
     @FXML
     private Label userConnected;
@@ -69,38 +69,38 @@ public class MusiqueOverviewController {
     @FXML
     private void initialize() { // c'est comme un constructeur
         // Initialize the person table with the two columns.
-        groupeRecentColumn.setCellValueFactory(
+        bandRapColumn.setCellValueFactory(
                 cellData -> cellData.getValue().getSingerProperty());
-        styleRecentColumn.setCellValueFactory(
-                cellData -> cellData.getValue().getTypeProperty());
-        groupePopulaireColumn.setCellValueFactory(
+        nameRapColumn.setCellValueFactory(
+                cellData -> cellData.getValue().getNameProperty());
+        bandFrenchColumn.setCellValueFactory(
                 cellData -> cellData.getValue().getSingerProperty());
-        stylePopulaireColumn.setCellValueFactory(
-                cellData -> cellData.getValue().getTypeProperty());
-        groupeInstrumentalColumn.setCellValueFactory(
+        nameFrenchColumn.setCellValueFactory(
+                cellData -> cellData.getValue().getNameProperty());
+        bandPopColumn.setCellValueFactory(
                 cellData -> cellData.getValue().getSingerProperty());
-        styleInstrumentalColumn.setCellValueFactory(
-                cellData -> cellData.getValue().getTypeProperty());
-        groupeAnnee80Column.setCellValueFactory(
+        namePopColumn.setCellValueFactory(
+                cellData -> cellData.getValue().getNameProperty());
+        bandJazzColumn.setCellValueFactory(
                 cellData -> cellData.getValue().getSingerProperty());
-        styleAnnee80Column.setCellValueFactory(
-                cellData -> cellData.getValue().getTypeProperty());
+        nameJazzColumn.setCellValueFactory(
+                cellData -> cellData.getValue().getNameProperty());
 
         // Clear person details.
         showMusiqueDetails(null);
 
         // Listen for selection changes and show the person details when changed.
-        musiqueRecenteTable.getSelectionModel().selectedItemProperty().addListener(
+        musicRapTable.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showMusiqueDetails(newValue));
-        musiquePopulaireTable.getSelectionModel().selectedItemProperty().addListener(
+        musicFrenchTable.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showMusiqueDetails(newValue));
-        musiqueAnnee80Table.getSelectionModel().selectedItemProperty().addListener(
+        musicPopTable.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showMusiqueDetails(newValue));
-        musiqueInstrumentalTable.getSelectionModel().selectedItemProperty().addListener(
+        musicJazzTable.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showMusiqueDetails(newValue));
-        choix.setVisible(true); // Pour maitriser si connecter en tant qu'invité ou en tant que connecté
+        styleChoice.setVisible(true); // Pour maitriser si connecter en tant qu'invité ou en tant que connecté
         //choix.getValue(); Pour recupere le string dans choix.
-        choix.setValue("Ma page");
+        styleChoice.setValue("Ma page");
        // choix.setItems();// mettre une observable list comme ppour les musique
     }
 
@@ -113,15 +113,15 @@ public class MusiqueOverviewController {
         this.mainApp = mainApp;
 
         // Add observable list data to the table
-        musiqueRecenteTable.setItems(mainApp.getmusiqueRecentData()); // on récupère la personData de la mainApp
-        musiquePopulaireTable.setItems(mainApp.getmusiquePopulaireData());
-        musiqueInstrumentalTable.setItems(mainApp.getMusiqueInstrumentalData());
-        musiqueAnnee80Table.setItems(mainApp.getmusiqueAnnee80Data());
+        musicRapTable.setItems(mainApp.getRapMusicData()); // on récupère la personData de la mainApp
+        musicFrenchTable.setItems(mainApp.getFrenchMusicData());
+        musicPopTable.setItems(mainApp.getPopMusicData());
+        musicJazzTable.setItems(mainApp.getJazzMusicData());
 
         if(person != null)
             userConnected.setText(person.getLogin());
 
-        choix.setItems(mainApp.getStyle_Of_Musique());
+        styleChoice.setItems(mainApp.getStyle_Of_Musique());
     }
 
     /**
@@ -133,16 +133,16 @@ public class MusiqueOverviewController {
     private void showMusiqueDetails(Music musique) {
         if (musique != null) {  // cette methode permet d'écrire du texte dans les label de droite a partir des donné renseigné dans personData(voir mainApp).
             // Fill the labels with info from the person object.
-            nomDuGroupeLabel.setText(musique.getSinger());
+            bandNameLabel.setText(musique.getSinger());
             styleLabel.setText(musique.getSort());
             countryLabel.setText(musique.getCountry());
             //sortieLabel.setText(DateUtil.format(musique.getSortie()));
         } else {
             // Person is null, remove all the text.
-            nomDuGroupeLabel.setText("");
+            bandNameLabel.setText("");
             styleLabel.setText("");
             countryLabel.setText("");
-            sortieLabel.setText("");
+            releaseDateLabel.setText("");
         }
     }
 }

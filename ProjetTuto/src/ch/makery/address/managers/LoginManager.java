@@ -12,7 +12,7 @@ import java.sql.*;
 public class LoginManager {
     private String user = "root";
     private String password = "";
-    private Connection connexion = null;
+    private Connection connection = null;
     private String dbName = "muMusique";
     private String url = "jdbc:mysql://localhost:3306/"+dbName+"?autoReconnect=true&useSSL=false&serverTimezone=UTC";
 
@@ -35,10 +35,10 @@ public class LoginManager {
 
     public Person checkIdentifiersSignIn(String email, String passwd) throws SQLException, ClassNotFoundException {
         Class.forName("com.mysql.cj.jdbc.Driver");
-        connexion = DriverManager.getConnection(url, user, password);
+        connection = DriverManager.getConnection(url, user, password);
 
         String sql = "Select * from compte where email = ? and mdp = ?";
-        PreparedStatement ps = connexion.prepareStatement(sql);
+        PreparedStatement ps = connection.prepareStatement(sql);
         ps.setString(1, email);
         ps.setString(2, passwd);
         ResultSet rs = ps.executeQuery();
@@ -49,48 +49,49 @@ public class LoginManager {
             p = new Person(rs.getString("email"), rs.getString("mdp"), rs.getString("prenom"), rs.getString("nom"), rs.getString("login"));
         }
 
-        connexion.close();
+        connection.close();
         return p;
     }
 
-    public void signUpUser(String email, String passwd) {
+    public Person signUpUser(String email, String passwd) {
         try {
             boolean res = checkIdentifiersSignUp(email, passwd);
             if(res) {
-                connectUser(email, passwd);
+                return connectUser(email, passwd);
             }
             else {
-
+                return null;
             }
         }
         catch(Exception e) {
             e.printStackTrace();
         }
+        return null;
     }
 
     private boolean checkIdentifiersSignUp(String email, String passwd) throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.cj.jdbc.Driver");
-        connexion = DriverManager.getConnection(url, user, password);
+        connection = DriverManager.getConnection(url, user, password);
 
         String sql = "Select * from compte where email = ?";
-        PreparedStatement ps = connexion.prepareStatement(sql);
+        PreparedStatement ps = connection.prepareStatement(sql);
         ps.setString(1, email);
         ResultSet rs = ps.executeQuery();
 
         Person p = new Person();
 
         while (rs.next()) {
-            connexion.close();
+            connection.close();
             return false;
         }
 
         sql = "Insert into compte (email, mdp, niveau) values(?, ?, 0)";
-        ps = connexion.prepareStatement(sql);
+        ps = connection.prepareStatement(sql);
         ps.setString(1, email);
         ps.setString(2, passwd);
         ps.execute();
 
-        connexion.close();
+        connection.close();
         return true;
     }
 }

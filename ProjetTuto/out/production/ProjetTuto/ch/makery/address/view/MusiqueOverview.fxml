@@ -19,35 +19,35 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="435.0" prefWidth="1198.0">
                <children>
                   <Label layoutX="14.0" layoutY="14.0" prefHeight="17.0" prefWidth="103.0" text="Mumusique" />
-                  <TableView fx:id="musiqueRecenteTable" layoutX="11.0" layoutY="103.0" prefHeight="400.0" prefWidth="248.0">
+                  <TableView fx:id="musicRapTable" layoutX="11.0" layoutY="103.0" prefHeight="400.0" prefWidth="248.0">
                     <columns>
-                      <TableColumn fx:id="groupeRecentColumn" prefWidth="129.0" text="Groupe" />
-                      <TableColumn fx:id="styleRecentColumn" prefWidth="118.0" text="Style" />
+                      <TableColumn fx:id="bandRapColumn" prefWidth="129.0" text="Interprète" />
+                      <TableColumn fx:id="nameRapColumn" prefWidth="118.0" text="Chanson" />
                     </columns>
                   </TableView>
-                  <TableView fx:id="musiquePopulaireTable" layoutX="284.0" layoutY="103.0" prefHeight="400.0" prefWidth="248.0">
+                  <TableView fx:id="musicFrenchTable" layoutX="284.0" layoutY="103.0" prefHeight="400.0" prefWidth="248.0">
                      <columns>
-                        <TableColumn fx:id="groupePopulaireColumn" prefWidth="129.0" text="Groupe" />
-                        <TableColumn fx:id="stylePopulaireColumn" prefWidth="118.0" text="Style" />
+                        <TableColumn fx:id="bandFrenchColumn" prefWidth="129.0" text="Interprète" />
+                        <TableColumn fx:id="nameFrenchColumn" prefWidth="118.0" text="Chanson" />
                      </columns>
                   </TableView>
-                  <TableView fx:id="musiqueAnnee80Table" layoutX="566.0" layoutY="103.0" prefHeight="400.0" prefWidth="248.0">
+                  <TableView fx:id="musicPopTable" layoutX="566.0" layoutY="103.0" prefHeight="400.0" prefWidth="248.0">
                      <columns>
-                        <TableColumn fx:id="groupeAnnee80Column" prefWidth="129.0" text="Groupe" />
-                        <TableColumn fx:id="styleAnnee80Column" prefWidth="118.0" text="Style" />
+                        <TableColumn fx:id="bandPopColumn" prefWidth="129.0" text="Interprète" />
+                        <TableColumn fx:id="namePopColumn" prefWidth="118.0" text="Chanson" />
                      </columns>
                   </TableView>
-                  <TableView fx:id="musiqueInstrumentalTable" layoutX="877.0" layoutY="103.0" prefHeight="400.0" prefWidth="248.0">
+                  <TableView fx:id="musicJazzTable" layoutX="877.0" layoutY="103.0" prefHeight="400.0" prefWidth="248.0">
                      <columns>
-                        <TableColumn fx:id="groupeInstrumentalColumn" prefWidth="129.0" text="Groupe" />
-                        <TableColumn fx:id="styleInstrumentalColumn" prefWidth="118.0" text="Style" />
+                        <TableColumn fx:id="bandJazzColumn" prefWidth="129.0" text="Interprète" />
+                        <TableColumn fx:id="nameJazzColumn" prefWidth="118.0" text="Chanson" />
                      </columns>
                   </TableView>
-                  <Label layoutX="14.0" layoutY="72.0" prefHeight="17.0" prefWidth="103.0" text="Recents" />
-                  <Label layoutX="284.0" layoutY="72.0" prefHeight="17.0" prefWidth="103.0" text="Populaires" />
-                  <Label layoutX="566.0" layoutY="72.0" prefHeight="17.0" prefWidth="103.0" text="Année 80" />
-                  <Label layoutX="877.0" layoutY="72.0" prefHeight="17.0" prefWidth="103.0" text="Instrumentals" />
-                  <ChoiceBox fx:id="choix" layoutX="854.0" layoutY="31.0" prefWidth="150.0" />
+                  <Label layoutX="14.0" layoutY="72.0" prefHeight="17.0" prefWidth="103.0" text="Rap" />
+                  <Label layoutX="284.0" layoutY="72.0" prefHeight="21.0" prefWidth="123.0" text="Chanson Française" />
+                  <Label layoutX="566.0" layoutY="72.0" prefHeight="17.0" prefWidth="103.0" text="Pop" />
+                  <Label layoutX="877.0" layoutY="72.0" prefHeight="17.0" prefWidth="103.0" text="Jazz" />
+                  <ChoiceBox fx:id="styleChoice" layoutX="854.0" layoutY="31.0" prefWidth="150.0" />
                   <Label fx:id="userConnected" layoutX="1108.0" layoutY="36.0" prefHeight="21.0" prefWidth="49.0" />
                </children>
             </AnchorPane>
@@ -70,9 +70,9 @@
                         <Label text="style" GridPane.rowIndex="1" />
                         <Label text="sortie" GridPane.rowIndex="2" />
                         <Label text="pays" GridPane.rowIndex="3" />
-                        <Label fx:id="nomDuGroupeLabel" text="Label" GridPane.columnIndex="1" />
+                        <Label fx:id="bandNameLabel" text="Label" GridPane.columnIndex="1" />
                         <Label fx:id="styleLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label fx:id="sortieLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label fx:id="releaseDateLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <Label fx:id="countryLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                      </children>
                   </GridPane>
