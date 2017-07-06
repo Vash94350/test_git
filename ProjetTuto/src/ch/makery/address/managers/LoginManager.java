@@ -20,7 +20,6 @@ public class LoginManager {
         try {
             Person person = checkIdentifiersSignIn(email, passwd);
             if(person.getLogin() != null) {
-                MainApp app = new MainApp();
                 return person;
             }
             else {

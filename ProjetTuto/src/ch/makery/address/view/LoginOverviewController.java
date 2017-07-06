@@ -6,9 +6,14 @@ import ch.makery.address.model.Login;
 import ch.makery.address.model.Person;
 import ch.makery.address.util.DateUtil;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import sun.rmi.runtime.Log;
+
+import java.io.IOException;
 
 public class LoginOverviewController {
     @FXML
@@ -32,6 +37,7 @@ public class LoginOverviewController {
 
     // Reference to the main application.
     private MainApp mainApp;
+    private BorderPane rLayout;
 
     /**
      * The constructor.
@@ -48,10 +54,16 @@ public class LoginOverviewController {
     private void initialize() { // c'est comme un constructeur
     }
 
-    @FXML
     public void loadSignIn() {
         LoginManager lm = new LoginManager();
         Person person = lm.connectUser(fieldEmailConnection.getText(), fieldPasswordConnection.getText());
+
+        MusiqueOverviewController moc = new MusiqueOverviewController();
+        if(person != null) {
+            System.out.println(rLayout);
+
+            //moc.showMusicOverview(person, this.rLayout);
+        }
     }
 
     @FXML
@@ -62,8 +74,29 @@ public class LoginOverviewController {
         Person person = new Person();
         if(passwd1 != null && passwd2 != null && passwd1.equals(passwd2))
             person = lm.signUpUser(fieldEmailLogin.getText(), fieldPasswordLogin_1.getText());
+
         else {
 
+        }
+    }
+
+    public void showLoginOverview(BorderPane rootLayout, MainApp app) {
+        try {
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/LoginOverview.fxml"));
+            AnchorPane loginOverview = (AnchorPane) loader.load();
+
+
+            rootLayout.setCenter(loginOverview); // on met au centre de notre borderpane, qui n'est autre que RootLayout, notre PersonOverview
+            System.out.println(rootLayout.toString());
+            this.rLayout = rootLayout;
+            System.out.println(rLayout.toString());
+
+            this.setMainApp(app); // drole d'histoire
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

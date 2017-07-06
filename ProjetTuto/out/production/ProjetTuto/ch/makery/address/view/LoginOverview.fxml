@@ -7,15 +7,14 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.address.view.LoginOverviewController">
-   <children>
       <Label layoutX="304.0" layoutY="131.0" prefHeight="34.0" prefWidth="403.0" text="Bienvenue sur Mumusique">
          <font>
             <Font name="Cambria Math" size="30.0" />
          </font>
       </Label>
       <Button fx:id="connect" layoutX="304.0" layoutY="414.0" mnemonicParsing="false" onAction="#loadSignIn" text="Se connecter" />
-      <TextField fx:id="champs_co_email" layoutX="304.0" layoutY="284.0" />
-      <TextField fx:id="champs_co_mdp" layoutX="304.0" layoutY="350.0" />
+      <TextField fx:id="fieldEmailConnection" layoutX="304.0" layoutY="284.0" />
+      <TextField fx:id="fieldPasswordConnection" layoutX="304.0" layoutY="350.0" />
       <Label layoutX="304.0" layoutY="256.0" prefHeight="17.0" prefWidth="97.0" text="Adresse e-mail :" />
       <Label layoutX="304.0" layoutY="321.0" prefHeight="17.0" prefWidth="97.0" text="Mot de passe :" />
       <Label layoutX="304.0" layoutY="215.0" prefHeight="34.0" prefWidth="114.0" text="Connection">
@@ -28,12 +27,11 @@
             <Font name="Cambria Math" size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="champs_ins_email" layoutX="543.0" layoutY="290.0" />
-      <TextField fx:id="champs_ins_mdp1" layoutX="543.0" layoutY="356.0" />
+      <TextField fx:id="fieldEmailLogin" layoutX="543.0" layoutY="290.0" />
+      <TextField fx:id="fieldPasswordLogin_1" layoutX="543.0" layoutY="356.0" />
       <Label layoutX="543.0" layoutY="262.0" prefHeight="17.0" prefWidth="97.0" text="Adresse e-mail :" />
       <Label layoutX="543.0" layoutY="327.0" prefHeight="17.0" prefWidth="97.0" text="Mot de passe :" />
-      <TextField fx:id="champs_ins_mdp2" layoutX="543.0" layoutY="426.0" />
+      <TextField fx:id="fieldPasswordLogin_2" layoutX="543.0" layoutY="426.0" />
       <Label layoutX="543.0" layoutY="397.0" prefHeight="17.0" prefWidth="149.0" text="Confirmer mot de passe :" />
       <Button fx:id="inscription" layoutX="543.0" layoutY="477.0" mnemonicParsing="false" onAction="#loadSignUp" text="S'inscrire" />
-   </children>
 </AnchorPane>

@@ -25,7 +25,7 @@ public class Music {
     private StringProperty country;
     private StringProperty date;
 
-    public Music(String name, String description, String duration, String singer, int views, String url, String sort, String country) {
+    public Music(String name, String description, String duration, String singer, int views, String url, String sort, String country, String date) {
         this.name = new SimpleStringProperty(name);
         this.description = new SimpleStringProperty(description);
         this.duration = new SimpleStringProperty(duration);
@@ -34,7 +34,7 @@ public class Music {
         this.url = new SimpleStringProperty(url);
         this.sort = new SimpleStringProperty(sort);
         this.country = new SimpleStringProperty(country);
-        //this.date = new SimpleStringProperty(DateUtil.format((LocalDate) date));
+        this.date = new SimpleStringProperty(date);
     }
 
     public Music() {
@@ -47,6 +47,7 @@ public class Music {
         this.url = new SimpleStringProperty();
         this.sort = new SimpleStringProperty();
         this.country = new SimpleStringProperty();
+        this.date = new SimpleStringProperty();
     }
 
 
@@ -126,5 +127,9 @@ public class Music {
         this.country.set(country);
     }
 
-    //public void setDate(Date date) {this.date = date;}
+    public void setDate(Date date) { this.date.set(date.toString());}
+
+    public StringProperty getDateProperty() { return date;}
+
+    public String getDate() { return date.get();}
 }

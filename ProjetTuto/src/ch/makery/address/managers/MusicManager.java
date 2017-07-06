@@ -46,7 +46,7 @@ public class MusicManager {
         music.setSort(rs.getString("genre"));
         music.setUrl(rs.getString("chemin"));
         music.setViews(rs.getInt("vue"));
-        //music.setDate(rs.getDate("date"));
+        music.setDate(rs.getDate("date"));
 
         return music;
     }

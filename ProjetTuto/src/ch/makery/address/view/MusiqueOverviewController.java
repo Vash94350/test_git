@@ -3,11 +3,16 @@ package ch.makery.address.view;
 import ch.makery.address.model.Music;
 import ch.makery.address.model.Person;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import ch.makery.address.MainApp;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+
+import java.io.IOException;
 
 public class MusiqueOverviewController {
     @FXML
@@ -121,28 +126,47 @@ public class MusiqueOverviewController {
         if(person != null)
             userConnected.setText(person.getLogin());
 
-        styleChoice.setItems(mainApp.getStyle_Of_Musique());
+        styleChoice.setItems(mainApp.getStyle_Of_Music());
     }
 
     /**
      * Fills all text fields to show details about the person.
      * If the specified person is null, all text fields are cleared.
      *
-     * @param musique the person or null
+     * @param music the person or null
      */
-    private void showMusiqueDetails(Music musique) {
-        if (musique != null) {  // cette methode permet d'écrire du texte dans les label de droite a partir des donné renseigné dans personData(voir mainApp).
+    private void showMusiqueDetails(Music music) {
+        if (music != null) {  // cette methode permet d'écrire du texte dans les label de droite a partir des donné renseigné dans personData(voir mainApp).
             // Fill the labels with info from the person object.
-            bandNameLabel.setText(musique.getSinger());
-            styleLabel.setText(musique.getSort());
-            countryLabel.setText(musique.getCountry());
-            //sortieLabel.setText(DateUtil.format(musique.getSortie()));
+            bandNameLabel.setText(music.getSinger());
+            styleLabel.setText(music.getSort());
+            countryLabel.setText(music.getCountry());
+            releaseDateLabel.setText(music.getDate());
         } else {
             // Person is null, remove all the text.
             bandNameLabel.setText("");
             styleLabel.setText("");
             countryLabel.setText("");
             releaseDateLabel.setText("");
+        }
+    }
+
+    public void showMusicOverview(Person person, BorderPane rootLayout) {
+        try {
+            // Load musique overview.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/MusiqueOverview.fxml"));
+            AnchorPane musiqueOverview = (AnchorPane) loader.load();
+
+            // Set person overview into the center of root layout.
+            rootLayout.setCenter(musiqueOverview); // on met au centre de notre borderpane, qui n'est autre que RootLayout, notre PersonOverview
+
+            // Give the controller access to the main app.
+            MusiqueOverviewController controller = loader.getController(); // pour controler ce qui se passe dans la page PersonOverview on associe le fichier controller associé
+            controller.setMainApp(mainApp, person); // drole d'histoire
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
