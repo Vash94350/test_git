@@ -1,9 +1,13 @@
 package ch.makery.address.view;
 
+import ch.makery.address.managers.MusicManager;
 import ch.makery.address.model.Music;
 import ch.makery.address.model.Person;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -11,8 +15,10 @@ import javafx.scene.control.TableView;
 import ch.makery.address.MainApp;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class MusiqueOverviewController {
     @FXML
@@ -59,6 +65,31 @@ public class MusiqueOverviewController {
 
     // Reference to the main application.
     private MainApp mainApp;
+
+    private ObservableList<Music> musicRapData = FXCollections.observableArrayList();
+    private ObservableList<Music> frenchMusicData = FXCollections.observableArrayList();
+    private ObservableList<Music> popMusicData = FXCollections.observableArrayList();
+    private ObservableList<Music> jazzMusicData = FXCollections.observableArrayList();
+    private ObservableList<Music> musicData = FXCollections.observableArrayList();
+    private ObservableList<String> style_of_music = FXCollections.observableArrayList();
+    private Music allMusics[]=new Music[9];
+
+    public ObservableList<Music> getRapMusicData() {
+        return musicRapData;
+    }
+    public ObservableList<Music> getFrenchMusicData() { return frenchMusicData;}
+    public ObservableList<Music> getPopMusicData() { return popMusicData;}
+    public ObservableList<Music> getJazzMusicData() {
+        return jazzMusicData;
+    }
+    public Music[] getMusics(){
+        return allMusics;
+    }
+
+
+    public ObservableList<String> getStyle_Of_Music() {
+        return style_of_music;
+    }
 
     /**
      * The constructor.
@@ -118,15 +149,15 @@ public class MusiqueOverviewController {
         this.mainApp = mainApp;
 
         // Add observable list data to the table
-        musicRapTable.setItems(mainApp.getRapMusicData()); // on récupère la personData de la mainApp
-        musicFrenchTable.setItems(mainApp.getFrenchMusicData());
-        musicPopTable.setItems(mainApp.getPopMusicData());
-        musicJazzTable.setItems(mainApp.getJazzMusicData());
+        musicRapTable.setItems(getRapMusicData()); // on récupère la personData de la mainApp
+        musicFrenchTable.setItems(getFrenchMusicData());
+        musicPopTable.setItems(getPopMusicData());
+        musicJazzTable.setItems(getJazzMusicData());
 
         if(person != null)
             userConnected.setText(person.getLogin());
 
-        styleChoice.setItems(mainApp.getStyle_Of_Music());
+        styleChoice.setItems(getStyle_Of_Music());
     }
 
     /**
@@ -151,22 +182,46 @@ public class MusiqueOverviewController {
         }
     }
 
-    public void showMusicOverview(Person person, BorderPane rootLayout) {
+    public void showMusics() {
+        // Add some sample data
+        int i=0;
         try {
-            // Load musique overview.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/MusiqueOverview.fxml"));
-            AnchorPane musiqueOverview = (AnchorPane) loader.load();
 
-            // Set person overview into the center of root layout.
-            rootLayout.setCenter(musiqueOverview); // on met au centre de notre borderpane, qui n'est autre que RootLayout, notre PersonOverview
 
-            // Give the controller access to the main app.
-            MusiqueOverviewController controller = loader.getController(); // pour controler ce qui se passe dans la page PersonOverview on associe le fichier controller associé
-            controller.setMainApp(mainApp, person); // drole d'histoire
+            MusicManager mm = new MusicManager();
 
-        } catch (IOException e) {
+            ArrayList<Music> list = mm.getAllmusics();
+
+            for (Music music : list) {
+                musicData.add(new Music(music.getName(), music.getDescription(), music.getDuration(), music.getSinger(), music.getViews(), music.getUrl(), music.getSort(), music.getCountry(), music.getDate()));
+            }
+
+            while (i < musicData.size()) {
+                if (musicData.get(i).getSort().equals("Rap")) {
+                    musicRapData.add(musicData.get(i));
+                }
+                else if (musicData.get(i).getSort().equals("Chanson Française")) {
+                    frenchMusicData.add(musicData.get(i));
+                }
+                else if (musicData.get(i).getSort().equals("Pop")) {
+                    popMusicData.add(musicData.get(i));
+                }
+                else if (musicData.get(i).getSort().equals("Jazz")) {
+                    jazzMusicData.add(musicData.get(i));
+                }
+                i++;
+            }
+
+            ArrayList<String> sorts = mm.getAllSorts();
+
+            for(String str : sorts) {
+                style_of_music.add(str);
+            }
+            style_of_music.add("Aucun filtre");
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 }

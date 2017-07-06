@@ -7,10 +7,12 @@ import ch.makery.address.model.Person;
 import ch.makery.address.util.DateUtil;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import sun.rmi.runtime.Log;
 
 import java.io.IOException;
@@ -36,6 +38,7 @@ public class LoginOverviewController {
 
 
     // Reference to the main application.
+    private Stage primaryStage;
     private MainApp mainApp;
     private BorderPane rLayout;
 
@@ -58,11 +61,10 @@ public class LoginOverviewController {
         LoginManager lm = new LoginManager();
         Person person = lm.connectUser(fieldEmailConnection.getText(), fieldPasswordConnection.getText());
 
-        MusiqueOverviewController moc = new MusiqueOverviewController();
         if(person != null) {
             System.out.println(rLayout);
 
-            //moc.showMusicOverview(person, this.rLayout);
+            showMusicOverview(person);
         }
     }
 
@@ -80,20 +82,41 @@ public class LoginOverviewController {
         }
     }
 
-    public void showLoginOverview(BorderPane rootLayout, MainApp app) {
+    public void showLoginOverview(BorderPane rootLayout) {
         try {
 
+            LoginOverviewController lOC = new LoginOverviewController();
+
             FXMLLoader loader = new FXMLLoader();
+            loader.setController(lOC);
             loader.setLocation(MainApp.class.getResource("view/LoginOverview.fxml"));
             AnchorPane loginOverview = (AnchorPane) loader.load();
 
-
             rootLayout.setCenter(loginOverview); // on met au centre de notre borderpane, qui n'est autre que RootLayout, notre PersonOverview
-            System.out.println(rootLayout.toString());
-            this.rLayout = rootLayout;
-            System.out.println(rLayout.toString());
+            lOC.rLayout = rootLayout;
 
-            this.setMainApp(app); // drole d'histoire
+
+            //this.setMainApp(app); // drole d'histoire
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showMusicOverview(Person person) {
+        try {
+            // Load musique overview.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/MusiqueOverview.fxml"));
+            AnchorPane musicOverview = (AnchorPane) loader.load();
+
+            // Set person overview into the center of root layout.
+            rLayout.setCenter(musicOverview); // on met au centre de notre borderpane, qui n'est autre que RootLayout, notre PersonOverview
+
+            // Give the controller access to the main app.
+            MusiqueOverviewController controller = loader.getController(); // pour controler ce qui se passe dans la page PersonOverview on associe le fichier controller associé
+            controller.setMainApp(mainApp, person); // drole d'histoire
+
 
         } catch (IOException e) {
             e.printStackTrace();

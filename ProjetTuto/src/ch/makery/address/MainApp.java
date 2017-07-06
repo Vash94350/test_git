@@ -33,7 +33,7 @@ public class MainApp extends Application {
         initRootLayout();
         LoginOverviewController loc = new LoginOverviewController();
         //showMusicOverview(null); // Il faut inserer le Z index ici pour l'instant on ne lance que la fenetre de connection
-        loc.showLoginOverview(rootLayout, this);
+        loc.showLoginOverview(rootLayout);
     }
 
     /**
@@ -71,78 +71,17 @@ public class MainApp extends Application {
     /**
      * The data as an observable list of Persons.
      */
-    private ObservableList<Music> musicRapData = FXCollections.observableArrayList();
-    private ObservableList<Music> frenchMusicData = FXCollections.observableArrayList();
-    private ObservableList<Music> popMusicData = FXCollections.observableArrayList();
-    private ObservableList<Music> jazzMusicData = FXCollections.observableArrayList();
-    private ObservableList<Music> musicData = FXCollections.observableArrayList();
-    private ObservableList<String> style_of_music = FXCollections.observableArrayList();
-    private Music allMusics[]=new Music[9];
 
     /**
      * Constructor
      */
     public MainApp() {
 
-        // Add some sample data
-        int i=0;
-        try {
-
-
-            MusicManager mm = new MusicManager();
-
-            ArrayList<Music> list = mm.getAllmusics();
-
-            for (Music music : list) {
-                musicData.add(new Music(music.getName(), music.getDescription(), music.getDuration(), music.getSinger(), music.getViews(), music.getUrl(), music.getSort(), music.getCountry(), music.getDate()));
-            }
-
-            while (i < musicData.size()) {
-                if (musicData.get(i).getSort().equals("Rap")) {
-                    musicRapData.add(musicData.get(i));
-                }
-                else if (musicData.get(i).getSort().equals("Chanson Française")) {
-                    frenchMusicData.add(musicData.get(i));
-                }
-                else if (musicData.get(i).getSort().equals("Pop")) {
-                    popMusicData.add(musicData.get(i));
-                }
-                else if (musicData.get(i).getSort().equals("Jazz")) {
-                    jazzMusicData.add(musicData.get(i));
-                }
-                i++;
-            }
-
-            ArrayList<String> sorts = mm.getAllSorts();
-
-            for(String str : sorts) {
-                style_of_music.add(str);
-            }
-            style_of_music.add("Aucun filtre");
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     /**
      * Returns the data as an observable list of Persons.
      * @return
      */
-    public ObservableList<Music> getRapMusicData() {
-        return musicRapData;
-    }
-    public ObservableList<Music> getFrenchMusicData() { return frenchMusicData;}
-    public ObservableList<Music> getPopMusicData() { return popMusicData;}
-    public ObservableList<Music> getJazzMusicData() {
-        return jazzMusicData;
-    }
-    public Music[] getMusics(){
-        return allMusics;
-    }
 
-
-    public ObservableList<String> getStyle_Of_Music() {
-        return style_of_music;
-    }
 }

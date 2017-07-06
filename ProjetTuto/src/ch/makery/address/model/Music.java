@@ -1,13 +1,11 @@
 package ch.makery.address.model;
 
-import ch.makery.address.util.DateUtil;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 import java.sql.Date;
-import java.time.LocalDate;
 
 /**
  * Created by torgu on 14/06/2017.
