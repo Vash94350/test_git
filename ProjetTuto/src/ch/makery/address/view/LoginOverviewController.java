@@ -62,9 +62,10 @@ public class LoginOverviewController {
         Person person = lm.connectUser(fieldEmailConnection.getText(), fieldPasswordConnection.getText());
 
         if(person != null) {
-            System.out.println(rLayout);
-
             showMusicOverview(person);
+        }
+        else {
+
         }
     }
 
@@ -115,6 +116,7 @@ public class LoginOverviewController {
 
             // Give the controller access to the main app.
             MusiqueOverviewController controller = loader.getController(); // pour controler ce qui se passe dans la page PersonOverview on associe le fichier controller associé
+            controller.showMusics();
             controller.setMainApp(mainApp, person); // drole d'histoire
 
 
