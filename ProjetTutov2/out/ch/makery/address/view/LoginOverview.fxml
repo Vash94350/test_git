@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+      <Label layoutX="304.0" layoutY="131.0" prefHeight="34.0" prefWidth="403.0" text="Bienvenue sur Mumusique">
+         <font>
+            <Font name="Cambria Math" size="30.0" />
+         </font>
+      </Label>
+      <Button fx:id="connect" layoutX="304.0" layoutY="414.0" mnemonicParsing="false" onAction="#loadSignIn" text="Se connecter" />
+      <TextField fx:id="fieldEmailConnection" layoutX="304.0" layoutY="284.0" />
+      <TextField fx:id="fieldPasswordConnection" layoutX="304.0" layoutY="350.0" />
+      <Label layoutX="304.0" layoutY="256.0" prefHeight="17.0" prefWidth="97.0" text="Adresse e-mail :" />
+      <Label layoutX="304.0" layoutY="321.0" prefHeight="17.0" prefWidth="97.0" text="Mot de passe :" />
+      <Label layoutX="304.0" layoutY="215.0" prefHeight="34.0" prefWidth="114.0" text="Connection">
+         <font>
+            <Font name="Cambria Math" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="543.0" layoutY="215.0" prefHeight="34.0" prefWidth="114.0" text="Inscription">
+         <font>
+            <Font name="Cambria Math" size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="fieldEmailLogin" layoutX="543.0" layoutY="290.0" />
+      <TextField fx:id="fieldPasswordLogin_1" layoutX="543.0" layoutY="356.0" />
+      <Label layoutX="543.0" layoutY="262.0" prefHeight="17.0" prefWidth="97.0" text="Adresse e-mail :" />
+      <Label layoutX="543.0" layoutY="327.0" prefHeight="17.0" prefWidth="97.0" text="Mot de passe :" />
+      <TextField fx:id="fieldPasswordLogin_2" layoutX="543.0" layoutY="426.0" />
+      <Label layoutX="543.0" layoutY="397.0" prefHeight="17.0" prefWidth="149.0" text="Confirmer mot de passe :" />
+      <Button fx:id="inscription" layoutX="543.0" layoutY="477.0" mnemonicParsing="false" onAction="#loadSignUp" text="S'inscrire" />
+   <Label fx:id="printInformations" layoutX="304.0" layoutY="381.0" prefHeight="25.0" prefWidth="185.0" textFill="#b21c1c" />
+</AnchorPane>
