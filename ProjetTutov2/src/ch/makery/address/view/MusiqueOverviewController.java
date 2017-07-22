@@ -21,6 +21,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MusiqueOverviewController {
+
+    @FXML
+    protected MenuItem seeFriends;
+
     @FXML
     private TableView<Music> musicRapTable;
     @FXML
@@ -61,14 +65,21 @@ public class MusiqueOverviewController {
     private ChoiceBox<String> styleChoice;
 
     @FXML
-    private Label userConnected;
+    private ChoiceBox<String> friendList;
+
+    @FXML
+    public Label userConnected;
 
     @FXML
     private CheckBox plugIn;
 
+    @FXML
+    private Button plugin;
+
     // Reference to the main application.
     private MainApp mainApp;
-    private BorderPane rLayout;
+    private static BorderPane rLayout=new BorderPane();
+    private Person person;
 
     private ObservableList<Music> musicRapData = FXCollections.observableArrayList();
     private ObservableList<Music> frenchMusicData = FXCollections.observableArrayList();
@@ -76,6 +87,7 @@ public class MusiqueOverviewController {
     private ObservableList<Music> jazzMusicData = FXCollections.observableArrayList();
     private ObservableList<Music> musicData = FXCollections.observableArrayList();
     private ObservableList<String> style_of_music = FXCollections.observableArrayList();
+    private ObservableList<String> my_friends = FXCollections.observableArrayList();
     private Music allMusics[]=new Music[9];
 
     public ObservableList<Music> getRapMusicData() {
@@ -94,12 +106,18 @@ public class MusiqueOverviewController {
     public ObservableList<String> getStyle_Of_Music() {
         return style_of_music;
     }
+    public ObservableList<String> getMy_friends() {
+        my_friends.add("ginette");
+        my_friends.add("Bernadette");
+        return my_friends;
+    }
 
     /**
      * The constructor.
      * The constructor is called before the initialize() method.
      */
     public MusiqueOverviewController() { //voir initialize
+
     }
 
     /**
@@ -140,8 +158,17 @@ public class MusiqueOverviewController {
                 (observable, oldValue, newValue) -> showMusiqueDetails(newValue));
         styleChoice.setVisible(true); // Pour maitriser si connecter en tant qu'invité ou en tant que connecté
         //choix.getValue(); Pour recupere le string dans choix.
-        styleChoice.setValue("Ma page");
        // choix.setItems();// mettre une observable list comme ppour les musique
+
+        friendList.setVisible(false);
+        plugin.setVisible(false);
+
+        musicRapTable.setItems(getRapMusicData()); // on récupère la personData de la mainApp
+        musicFrenchTable.setItems(getFrenchMusicData());
+        musicPopTable.setItems(getPopMusicData());
+        musicJazzTable.setItems(getJazzMusicData());
+        styleChoice.setItems(getStyle_Of_Music());
+        friendList.setItems(getMy_friends());
     }
 
     /**
@@ -153,16 +180,18 @@ public class MusiqueOverviewController {
         this.mainApp = mainApp;
 
         // Add observable list data to the table
-        musicRapTable.setItems(getRapMusicData()); // on récupère la personData de la mainApp
-        musicFrenchTable.setItems(getFrenchMusicData());
-        musicPopTable.setItems(getPopMusicData());
-        musicJazzTable.setItems(getJazzMusicData());
-
         if(person != null)
             userConnected.setText(person.getLogin());
 
-        styleChoice.setItems(getStyle_Of_Music());
     }
+    /**
+     * The data as an observable list of Persons.
+     */
+    /**
+     * Is called by the main application to give a reference back to itself.
+     *
+     * @param mainApp
+     */
 
     /**
      * Fills all text fields to show details about the person.
@@ -241,7 +270,11 @@ public class MusiqueOverviewController {
             // Give the controller access to the main app.
             MusiqueOverviewController controller = loader.getController(); // pour controler ce qui se passe dans la page PersonOverview on associe le fichier controller associé
             controller.showMusics();
+            this.person=person;
             controller.setMainApp(mainApp, person); // drole d'histoire
+            rLayout=rootlayout;
+            System.out.println(rLayout);
+            System.out.println(rootlayout);
 
 
         } catch (IOException e) {
@@ -255,15 +288,25 @@ public class MusiqueOverviewController {
         System.out.println("On entre bien dans le merdier !");
         System.out.println("On entre bien dans le merdier !");
         System.out.println("On entre bien dans le merdier !");
-        System.out.println(plugIn.isSelected());
         List<IModule> modules;
-        if(plugIn.isSelected()){
             modules=ModuleLoader.loadModules();
             for(IModule module : modules){
-                module.plug();
-
+                if(plugIn.isSelected()){
+                    System.out.println(this.rLayout);
+                    plugin.setVisible(true);
+                }
+                else {
+                    plugin.setVisible(false);
+                }
                 System.out.println(module.getName() + " OK. ");
             }
         }
+
+        public void launchPlugIn(){
+            List<IModule> modules;
+            modules=ModuleLoader.loadModules();
+            for(IModule module : modules) {
+                module.plug(friendList, mainApp, person, rLayout);
+            }
+        }
     }
-}

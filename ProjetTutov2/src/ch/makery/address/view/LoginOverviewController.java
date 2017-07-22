@@ -90,7 +90,7 @@ public class LoginOverviewController {
             rootLayout.setCenter(loginOverview); // on met au centre de notre borderpane, qui n'est autre que RootLayout, notre PersonOverview
             this.rLayout = rootLayout;
 
-            //this.setMainApp(app); // drole d'histoire
+            //setMainApp(app); // drole d'histoire
 
         } catch (IOException e) {
             e.printStackTrace();

@@ -25,6 +25,7 @@ public class MainApp extends Application {
     private BorderPane rootLayout; // le plus haut module de la hierarchie de notre fenetre
     private FXMLLoader loader;
 
+
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage; // drole d'histoire
@@ -32,6 +33,7 @@ public class MainApp extends Application {
 
         initRootLayout();
         LoginOverviewController loc = new LoginOverviewController();
+        loc.setMainApp(this);
         //showMusicOverview(null); // Il faut inserer le Z index ici pour l'instant on ne lance que la fenetre de connection
         loc.showLoginOverview(rootLayout);
     }
@@ -68,10 +70,6 @@ public class MainApp extends Application {
     public static void main(String[] args) {
         launch(args); // c'est le point de départ. Cela va créer un objet MainApp (donc renseigner l'ObservableList, puis executer la methodes start.
     }
-
-    /**
-     * The data as an observable list of Persons.
-     */
 
     /**
      * Constructor

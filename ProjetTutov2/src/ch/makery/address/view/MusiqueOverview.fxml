@@ -51,6 +51,8 @@
                   <ChoiceBox fx:id="styleChoice" layoutX="854.0" layoutY="31.0" prefWidth="150.0" />
                   <Label fx:id="userConnected" layoutX="1108.0" layoutY="36.0" prefHeight="21.0" prefWidth="49.0" />
                   <CheckBox fx:id="plugIn" layoutX="196.0" layoutY="35.0" mnemonicParsing="false" onAction="#loadPlugIn" text="Plugin" />
+                  <ChoiceBox fx:id="friendList" layoutX="594.0" layoutY="31.0" prefWidth="150.0" />
+                  <Button fx:id="plugin" layoutX="288.0" layoutY="30.0" mnemonicParsing="false" onAction="#launchPlugIn" prefHeight="25.0" prefWidth="123.0" text="Voir mes amis" AnchorPane.bottomAnchor="487.0" AnchorPane.leftAnchor="288.0" AnchorPane.rightAnchor="787.0" AnchorPane.topAnchor="30.0" />
                </children>
             </AnchorPane>
             <AnchorPane layoutX="10.0" layoutY="10.0" maxHeight="150.0" minHeight="150.0" minWidth="0.0" prefHeight="160.0" prefWidth="1198.0">
